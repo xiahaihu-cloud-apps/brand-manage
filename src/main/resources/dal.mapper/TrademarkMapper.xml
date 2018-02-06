@@ -1,7 +1,214 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shearf.cloud.apps.brand.manage.domain.model.Trademark">
+<mapper namespace="com.shearf.cloud.apps.brand.manage.dal.mapper.TrademarkMapper">
     <resultMap id="BaseResultMap" type="com.shearf.cloud.apps.brand.manage.domain.model.Trademark">
         <id property="id" column="id" jdbcType="INTEGER" />
+        <result property="name" column="name" jdbcType="VARCHAR" />
+        <result property="logo" column="logo" jdbcType="VARCHAR" />
+        <result property="code" column="code" jdbcType="CHAR" />
+        <result property="applyDate" column="apply_date" jdbcType="DATE" />
+        <result property="company" column="company" jdbcType="VARCHAR" />
+        <result property="price" column="price" jdbcType="DECIMAL" />
+        <result property="categoryCode" column="category_code" jdbcType="CHAR" />
+        <result property="status" column="status" jdbcType="TINYINT" />
+        <result property="rejectStatus" column="reject_status" jdbcType="TINYINT" />
+        <result property="startTime" column="start_time" jdbcType="DATE" />
+        <result property="endTime" column="end_time" jdbcType="DATE" />
+        <result property="credentials" column="credentials" jdbcType="VARCHAR" />
+        <result property="createUser" column="create_user" jdbcType="VARCHAR" />
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR" />
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP" />
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP" />
     </resultMap>
+
+    <sql id="BaseColumnList">
+        `id`, `name`, `logo`, `code`, `apply_date`, `company`, `price`, `category_code`, `status`, `reject_status`,
+        `start_time`, `end_time`, `credentials`, `create_user`, `update_user`, `update_time`, `create_time`
+    </sql>
+
+    <sql id="BaseQueryParam">
+        <if test="keyword != null">
+            AND (`name` LIKE %${keyword, jdbcType=VARCHAR}% OR `company` LIKE %${keyword, jdbcType=VARCHAR}%)
+        </if>
+        <if test="status != null">
+            AND `status` = #{status, jdbcType=TINYINT}
+        </if>
+        <if test="rejectStatus != null">
+            AND `reject_status` = #{rejectStatus, jdbcType=TINYINT}
+        </if>
+    </sql>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="Integer">
+        SELECT <include refid="BaseColumnList" /> FROM `brand_manage_trademark`
+        WHERE `id` = #{id, jdbcType=INTEGER}
+    </select>
+
+    <select id="queryByParam" resultMap="BaseResultMap" parameterType="com.shearf.cloud.apps.brand.manage.domain.param.TrademarkQueryParam">
+        SELECT <include refid="BaseColumnList" /> FROM `brand_manage_trademark`
+        <where>
+            <include refid="BaseQueryParam" />
+        </where>
+        ORDER BY `id` DESC
+    </select>
+
+    <insert id="insertSelective" parameterType="com.shearf.cloud.apps.brand.manage.domain.model.Trademark">
+        INSERT INTO `brand_manage_trademark`
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="logo != null">
+                `logo`,
+            </if>
+            <if test="code != null">
+                `code`,
+            </if>
+            <if test="applyDate != null">
+                `apply_code`,
+            </if>
+            <if test="company != null">
+                `company`,
+            </if>
+            <if test="price != null">
+                `price`,
+            </if>
+            <if test="categoryCode != null">
+                `category_code`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="rejectStatus != null">
+                `reject_status`,
+            </if>
+            <if test="startTime != null">
+                `start_time`,
+            </if>
+            <if test="endTime != null">
+                `end_time`,
+            </if>
+            <if test="credentials != null">
+                `credentials`,
+            </if>
+            <if test="createUser != null">
+                `create_user`,
+            </if>
+            <if test="updateUser != null">
+                `update_user`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+            <if test="updateTime != null">
+                `update_time`,
+            </if>
+        </trim>
+        <trim prefix="VALUES(" suffixOverrides="," suffix=")">
+            <if test="name != null">
+                #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo, jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code, jdbcType=CHAR},
+            </if>
+            <if test="applyDate != null">
+                #{applyDate, jdbcType=DATE},
+            </if>
+            <if test="company != null">
+                #{company, jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price, jdbcType=DECIMAL},
+            </if>
+            <if test="categoryCode != null">
+                #{categoryCode, jdbcType=CHAR},
+            </if>
+            <if test="status != null">
+                #{status, jdbcType=TINYINT},
+            </if>
+            <if test="rejectStatus != null">
+                #{rejectStatus, jdbcType=TINYINT},
+            </if>
+            <if test="startTime != null">
+                #{startTime, jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                #{endTime, jdbcType=DATE},
+            </if>
+            <if test="credentials != null">
+                #{credentials, jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateSelective" parameterType="com.shearf.cloud.apps.brand.manage.domain.model.Trademark">
+        UPDATE `brand_manage_trademark`
+        <set>
+            <if test="name != null">
+                `name` = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                `logo` = #{logo, jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                `code` = #{code, jdbcType=CHAR},
+            </if>
+            <if test="applyDate != null">
+                `apply_date` = #{applyDate, jdbcType=DATE},
+            </if>
+            <if test="company != null">
+                `company` = #{company, jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                `price` = #{price, jdbcType=DECIMAL},
+            </if>
+            <if test="categoryCode != null">
+                `category_code` = #{categoryCode, jdbcType=CHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status, jdbcType=TINYINT},
+            </if>
+            <if test="rejectStatus != null">
+                `reject_status` = #{rejectStatus, jdbcType=TINYINT},
+            </if>
+            <if test="startTime != null">
+                `start_time` = #{startTime, jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                `end_time` = #{endTime, jdbcType=DATE},
+            </if>
+            <if test="credentials != null">
+                `credentials` = #{credentials, jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                `create_user` = #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateUser != null">
+                `update_user` = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            `id` = #{id, jdbcType=INTEGER}
+        </where>
+    </update>
 </mapper>

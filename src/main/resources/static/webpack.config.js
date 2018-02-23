@@ -2,11 +2,15 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    css: "./src/css.js",
+    main: "./src/app/main.js",
+    list: "./src/app/list.js"
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: '[name].build.js'
   },
   module: {
     rules: [
@@ -36,6 +40,12 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+            'file-loader'
+        ]
       }
     ]
   },
@@ -53,7 +63,15 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.ProvidePlugin({
+        jQuery: 'jquery',
+        $: 'jquery',
+        jquery: 'jquery',
+        ENV: path.resolve(__dirname, './env') + '/' + (process.env.NODE_ENV || "development")
+    }),
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {

@@ -1,0 +1,25 @@
+<template>
+  <section class="content-header">
+      <h1>{{ title }}</h1>
+      <!-- <ol class="breadcrumb"> -->
+        <!-- <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li> -->
+        <!-- <li class="active">Dashboard</li> -->
+      <!-- </ol> -->
+    </section>
+</template>
+<script>
+export default {
+    name: "ContentHeader",
+    data: function() {
+        return {
+        }
+    },
+    props: {
+        title: {
+            type: String,
+            default: "标题"
+        }
+    }
+}
+</script>
+

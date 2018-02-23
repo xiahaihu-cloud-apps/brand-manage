@@ -7,6 +7,7 @@ import com.shearf.cloud.apps.commons.foundation.mybatis.AbstractGenericService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  *
@@ -22,5 +23,18 @@ public class TrademarkServiceImpl extends AbstractGenericService<Trademark, Inte
     @Override
     protected TrademarkMapper getMapper() {
         return trademarkMapper;
+    }
+
+    @Override
+    public void save(String username, Trademark trademark) {
+        if (trademark.getId() != null && trademark.getId() > 0) {
+            trademark.setUpdateUser(username);
+            trademark.setUpdateTime(new Date());
+            updateSelective(trademark);
+        } else {
+            trademark.setCreateUser(username);
+            trademark.setCreateTime(new Date());
+            insertSelective(trademark);
+        }
     }
 }

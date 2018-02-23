@@ -12,9 +12,10 @@
         <result property="categoryCode" column="category_code" jdbcType="CHAR" />
         <result property="status" column="status" jdbcType="TINYINT" />
         <result property="rejectStatus" column="reject_status" jdbcType="TINYINT" />
-        <result property="startTime" column="start_time" jdbcType="DATE" />
-        <result property="endTime" column="end_time" jdbcType="DATE" />
+        <result property="startDate" column="start_date" jdbcType="DATE" />
+        <result property="endDate" column="end_date" jdbcType="DATE" />
         <result property="credentials" column="credentials" jdbcType="VARCHAR" />
+        <result property="remark" column="remark" jdbcType="VARCHAR" />
         <result property="createUser" column="create_user" jdbcType="VARCHAR" />
         <result property="updateUser" column="update_user" jdbcType="VARCHAR" />
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP" />
@@ -23,7 +24,7 @@
 
     <sql id="BaseColumnList">
         `id`, `name`, `logo`, `code`, `apply_date`, `company`, `price`, `category_code`, `status`, `reject_status`,
-        `start_time`, `end_time`, `credentials`, `create_user`, `update_user`, `update_time`, `create_time`
+        `start_date`, `end_date`, `credentials`, `remark`, `create_user`, `update_user`, `update_time`, `create_time`
     </sql>
 
     <sql id="BaseQueryParam">
@@ -81,14 +82,17 @@
             <if test="rejectStatus != null">
                 `reject_status`,
             </if>
-            <if test="startTime != null">
-                `start_time`,
+            <if test="startDate != null">
+                `start_date`,
             </if>
-            <if test="endTime != null">
-                `end_time`,
+            <if test="endDate != null">
+                `end_date`,
             </if>
             <if test="credentials != null">
                 `credentials`,
+            </if>
+            <if test="remark != null">
+                `remark`,
             </if>
             <if test="createUser != null">
                 `create_user`,
@@ -140,6 +144,9 @@
             <if test="credentials != null">
                 #{credentials, jdbcType=VARCHAR},
             </if>
+            <if test="remark != null">
+                #{remark, jdbcType=VARCHAR},
+            </if>
             <if test="createUser != null">
                 #{createUser, jdbcType=VARCHAR},
             </if>
@@ -185,14 +192,17 @@
             <if test="rejectStatus != null">
                 `reject_status` = #{rejectStatus, jdbcType=TINYINT},
             </if>
-            <if test="startTime != null">
-                `start_time` = #{startTime, jdbcType=DATE},
+            <if test="startDate != null">
+                `start_date` = #{startDate, jdbcType=DATE},
             </if>
-            <if test="endTime != null">
-                `end_time` = #{endTime, jdbcType=DATE},
+            <if test="endDate != null">
+                `end_date` = #{endDate, jdbcType=DATE},
             </if>
             <if test="credentials != null">
                 `credentials` = #{credentials, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                `remark` = #{remark, jdbcType=VARCHAR},
             </if>
             <if test="createUser != null">
                 `create_user` = #{createUser, jdbcType=VARCHAR},

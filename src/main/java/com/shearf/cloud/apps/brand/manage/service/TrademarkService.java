@@ -9,4 +9,12 @@ import com.shearf.cloud.apps.commons.foundation.mybatis.IGenericService;
  * @date 2018/2/7
  */
 public interface TrademarkService extends IGenericService<Trademark, Integer> {
+
+    /**
+     * 保存
+     *
+     * @param username
+     * @param trademark
+     */
+    void save(String username, Trademark trademark);
 }

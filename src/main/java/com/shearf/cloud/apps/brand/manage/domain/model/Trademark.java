@@ -44,7 +44,9 @@ public class Trademark extends BaseModel {
 
     private String remark;
 
-    private String credentials;
+    private String credentialsFront;
+
+    private String credentialsBack;
 
     private String createUser;
 
@@ -66,17 +68,17 @@ public class Trademark extends BaseModel {
         /**
          * 审核期
          */
-        REVIEW(1),
+        REVIEW(2),
 
         /**
          * 审核通过
          */
-        APPROVED(2),
+        APPROVED(3),
 
         /**
          * 申请驳回
          */
-        REJECTED(3),
+        REJECTED(4),
         ;
 
         @Getter

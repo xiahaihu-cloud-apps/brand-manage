@@ -82,12 +82,13 @@
                 <span>选择图样文件</span>
               <!-- The file input field used as target for the file upload widget -->
                 <input v-show="false" id="fileupload" type="file" name="file" multiple>
-            </span>
-          </label>
-          <input type="hidden" name="tmp" v-model="formData.tmpLogo">
-          <a :href="logoImg" data-lightbox="logoImg" data-title="商标样式" v-show="showLogo">
+              </span>
+            </label>
+            <input type="hidden" name="tmp" v-model="formData.tmpLogo">
+            <a :href="logoImg" data-lightbox="logoImg" data-title="商标样式" v-show="showLogo">
               <img :src="logoImg" width="100" height="100">
-          </a>
+            </a>
+            <i v-show="showLogo" style="cursor: pionter;" class="label-danger glyphicon glyphicon-remove danger" @click="deleteLogoImg"></i>
           </div>
         </div>
         <br>
@@ -96,20 +97,65 @@
             <label for="saveStatus" class="control-label">状态</label>
             <select id="saveStatus" class="form-control" name="status" v-model="formData.status">
               <option value="0">未申请</option>
-              <option value="1">申请中</option>
-              <option value="2">申请成功</option>
-              <option value="3">申请被拒</option>
+              <option value="1">已提交</option>
+              <option value="2">审核期</option>
+              <option value="3">审核通过</option>
+              <option value="4">驳回</option>
             </select>
           </div>
           <div class="col-md-2">
             <label for="saveRejectStatus" class="control-label">申请被拒</label>
             <select name="rejectStatus" id="saveReject" class="form-control" v-model="formData.rejectStatus">
-              <option value="0">未被拒</option>
+              <option value="0">未驳回</option>
+              <option value="1">部分驳回</option>
+              <option value="2">全部驳回</option>
+              <option value="3">部分驳回复审</option>
+              <option value="4">部分驳回不复审</option>
+              <option value="5">全部驳回不复审</option>
+              <option value="6">全部驳回复审</option>
             </select>
+          </div>
+          <div class="col-md-2">
+            <label for="savePrice" class="control-label">费用(元)</label>
+            <input type="text" name="price" id="savePrice" class="form-control" v-model="formData.price">
+          </div>
+          <div class="col-md-3">
+            <label for="saveStartDate" class="control-label">起始日期</label>
+            <input id="saveStartDate" data-provide="datepicker" data-date-format="yyyy-mm-dd" type="text" name="startDate" class="form-control" v-model="formData.startDate">
+          </div>
+          <div class="col-md-3">
+            <label for="saveEndDate" class="control-label">结束日期</label>
+            <input id="saveEndDate" data-provide="datepicker" data-date-format="yyyy-mm-dd" type="text" name="endDate" class="form-control" v-model="formData.endDate">
           </div>
         </div>
         <br>
-        <div class="row"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="saveCredentialsFront" class="control-label">
+              <span class="btn btn-success fileinput-button">
+                <span>选择证件照片正面</span>
+                <input v-show="false" id="saveCredentialsFront" type="file" name="file" multiple>
+                </span>
+            </label>
+            <a :href="credentialsImgFront" data-lightbox="logoImg" data-title="选择证件照片正面" v-show="showCredentialsFront">
+              <img :src="credentialsImgFront" width="842" height="595">
+            </a> 
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+              <label for="saveCredentialsBack" class="control-label">
+                <span class="btn btn-success fileinput-button">
+                  <span>选择证件照片背面</span>
+                  <input v-show="false" id="saveCredentialsBack" type="file" name="file" multiple>
+                  </span>
+              </label>
+              <a :href="credentialsImgBack" data-lightbox="credentialsImgBack" data-title="选择证件照片背面" v-show="showCredentialsBack">
+                <img :src="credentialsImgBack" width="842" height="595">
+              </a> 
+            </div>
+        </div>
       </form-dialog>
     </section>
   </div>

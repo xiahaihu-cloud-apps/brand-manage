@@ -8,6 +8,9 @@ import APIS from "../api"
 import 'bootstrap-datepicker'
 import 'blueimp-file-upload'
 
+import '../constant'
+import Constant from '../constant';
+
 const app = new Vue({
     el: "#app",
     data: {
@@ -22,12 +25,14 @@ const app = new Vue({
             company: "",
             price: "",
             categoryCode: "",
-            status: "",
-            rejectStatus: "",
+            status: Constant.Status.NOT_APPLY,
+            rejectStatus: Constant.RejectStatus.NOT_REJECTED,
             startTime: "",
             endTime: "",
-            credentials: "",
-            tmpCredentials: ""
+            credentialsFront: "",
+            tmpCredentialsFront: "",
+            credentialsBack: "",
+            tmpCredentialsBack: ""
         },
         defaultFormData: {
             id: "",
@@ -39,12 +44,14 @@ const app = new Vue({
             company: "",
             price: "",
             categoryCode: "",
-            status: "",
-            rejectStatus: "",
+            status: Constant.Status.NOT_APPLY,
+            rejectStatus: Constant.RejectStatus.NOT_REJECTED,
             startDate: "",
             endDate: "",
-            credentials: "",
-            tmpCredentials: ""
+            credentialsFront: "",
+            tmpCredentialsFront: "",
+            credentialsBack: "",
+            tmpCredentialsBack: ""
         },
         validateRules: {
             name: {
@@ -84,6 +91,9 @@ const app = new Vue({
         },
         openDialog: function() {
             this.$refs.formDialog.open();
+        },
+        deleteLogoImg: function() {
+            
         }
     },
     computed: {
@@ -94,26 +104,43 @@ const app = new Vue({
             return this.formData.tmpLogo != "" ? this.formData.tmpLogo :
                 this.formData.logo;
         },
-        credentialsImg: function() {
-            return this.formData.tmpCredentials != "" ? this.formData.tmpCredentials : 
-                this.formData.credentials;
+        credentialsImgFront: function() {
+            return this.formData.tmpCredentialsFront != "" ? this.formData.tmpCredentialsFront : 
+                this.formData.credentialsFront;
+        },
+        credentialsImgBack: function() {
+            return this.formData.tmpCredentialsBack != "" ? this.formData.tmpCredentialsBack : 
+                this.formData.credentialsBack;
         },
         showLogo: function() {
             return this.logoImg != "";
         },
-        showCredentials: function() {
-            return this.credentialsImg != "";
+        showCredentialsFront: function() {
+            return this.credentialsImgFront != "";
+        },
+        showCredentialsBack: function() {
+            return this.credentialsImgBack != "";
         }
     },
     mounted: function() {
         let _this = this;
-        $("#fileupload").fileupload({
+        $("#fileupload, #saveCredentialsBack, #saveCredentialsFront").fileupload({
             url: APIS.UPLOAD,
             dataType: "json",
             fileName: "file",
             done: function(e, data) {
-                _this.formData.tmpLogo = data.result.tmp;
+                console.info(e.target.id);
+                var targetId = e.target.id;
+                if (targetId == "fileupload") {
+                    _this.formData.tmpLogo = data.result.tmp;
+                }
+                if (targetId == "saveCredentialsBack") {
+                    _this.formData.tmpCredentialsBack = data.result.tmp;
+                }
+                if (targetId == "saveCredentialsFront") {
+                    _this.formData.tmpCredentialsFront = data.result.tmp;
+                }
             }
-        })
+        });
     }
 });

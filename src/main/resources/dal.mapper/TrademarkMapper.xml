@@ -14,7 +14,8 @@
         <result property="rejectStatus" column="reject_status" jdbcType="TINYINT" />
         <result property="startDate" column="start_date" jdbcType="DATE" />
         <result property="endDate" column="end_date" jdbcType="DATE" />
-        <result property="credentials" column="credentials" jdbcType="VARCHAR" />
+        <result property="credentialsFront" column="credentials_front" jdbcType="VARCHAR" />
+        <result property="credentialsBack" column="credentials_back" jdbcType="VARCHAR" />
         <result property="remark" column="remark" jdbcType="VARCHAR" />
         <result property="createUser" column="create_user" jdbcType="VARCHAR" />
         <result property="updateUser" column="update_user" jdbcType="VARCHAR" />
@@ -24,7 +25,7 @@
 
     <sql id="BaseColumnList">
         `id`, `name`, `logo`, `code`, `apply_date`, `company`, `price`, `category_code`, `status`, `reject_status`,
-        `start_date`, `end_date`, `credentials`, `remark`, `create_user`, `update_user`, `update_time`, `create_time`
+        `start_date`, `end_date`, `credentials_front`, `credentials_back`, `remark`, `create_user`, `update_user`, `update_time`, `create_time`
     </sql>
 
     <sql id="BaseQueryParam">

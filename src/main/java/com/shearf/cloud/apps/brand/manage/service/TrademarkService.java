@@ -17,4 +17,11 @@ public interface TrademarkService extends IGenericService<Trademark, Integer> {
      * @param trademark
      */
     void save(String username, Trademark trademark);
+
+    /**
+     * 保存
+     *
+     * @param trademark
+     */
+    void save(Trademark trademark);
 }

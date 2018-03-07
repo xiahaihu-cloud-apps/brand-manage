@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author xiahaihu
+ */
 public class UploadComponent {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UploadComponent.class);
@@ -61,7 +64,7 @@ public class UploadComponent {
     public String createUrl(String tmpUrl) {
         String tmpPath = tmpUrl;
         if (StringUtils.startsWith(tmpUrl, this.tmpUrlPrefix)) {
-            tmpPath = StringUtils.removeStart(tmpUrl, this.tmpPathPrefix);
+            tmpPath = StringUtils.removeStart(tmpUrl, this.tmpUrlPrefix);
         }
         String realPath = storePathPrefix + "/" + tmpPath;
         File realFile = new File(realPath);
@@ -72,10 +75,10 @@ public class UploadComponent {
             LOGGER.error("创建存储正式文件路径失败, file:{}", realFile.getAbsolutePath());
         }
         try {
-            FileUtils.moveFile(tmp, realFile);
+            FileUtils.copyFile(tmp, realFile);
         } catch (IOException e) {
             LOGGER.error("转移临时文件到正式文件失败, src:{}, dest:{}", tmp.getAbsolutePath(), realFile.getAbsoluteFile());
         }
-        return urlPrefix + "/" + tmpPath;
+        return urlPrefix + tmpPath;
     }
 }

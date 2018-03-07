@@ -3,6 +3,7 @@ package com.shearf.cloud.apps.brand.manage.web.controller;
 import com.shearf.cloud.apps.brand.manage.domain.model.Trademark;
 import com.shearf.cloud.apps.brand.manage.service.TrademarkService;
 import com.shearf.cloud.apps.commons.foundation.response.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,11 +15,13 @@ import javax.annotation.Resource;
 @RestController
 public class TrademarkController {
 
+    private static String tmpPathWord = "tmp";
     @Resource
     private TrademarkService trademarkService;
 
     @PostMapping
     public Response add(@RequestBody Trademark trademark) {
+        trademarkService.save(trademark);
         return Response.success();
     }
 

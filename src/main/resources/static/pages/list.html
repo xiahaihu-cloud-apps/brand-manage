@@ -49,8 +49,7 @@
         </div>
       </div>
       <form-dialog custom-dialog-class="modal-lg" ref="formDialog" style="display: none;"
-                   form-dialog-id="markFormDialog" :title="formDialogTitle" form-id="markForm" :form-data="formData"
-                   :default-form-data="defaultFormData" @save="save" :validate-rules="validateRules">
+                   form-dialog-id="markFormDialog" :title="formDialogTitle" form-id="markForm" :form-data="formData" @save="save" :validate-rules="validateRules">
         <div class="row">
           <div class="col-xs-4">
             <label class="control-label" for="saveName">名称</label>
@@ -66,7 +65,7 @@
           </div>
           <div class="col-xs-3">
             <label class="control-label" for="saveApplyDate">申请日期</label>
-            <input id="saveApplyDate" data-provide="datepicker" data-date-format="yyyy-mm-dd" type="text" name="applyDate" class="form-control" v-model="formData.applyDate">
+            <input id="saveApplyDate" data-date-format="yyyy-mm-dd" type="text" name="applyDate" class="form-control" v-model="formData.applyDate">
           </div>
         </div>
         <br>
@@ -84,11 +83,10 @@
                 <input v-show="false" id="fileupload" type="file" name="file" multiple>
               </span>
             </label>
-            <input type="hidden" name="tmp" v-model="formData.tmpLogo">
-            <a :href="logoImg" data-lightbox="logoImg" data-title="商标样式" v-show="showLogo">
-              <img :src="logoImg" width="100" height="100">
+            <a :href="formData.logo" data-lightbox="logoImg" data-title="商标样式" v-show="showLogo">
+              <img :src="formData.logo" width="100" height="100">
             </a>
-            <i v-show="showLogo" style="cursor: pionter;" class="label-danger glyphicon glyphicon-remove danger" @click="deleteLogoImg"></i>
+            <i v-show="showLogo" style="cursor: pointer;" class="label-danger glyphicon glyphicon-remove danger" @click="deleteLogoImg"></i>
           </div>
         </div>
         <br>
@@ -121,11 +119,11 @@
           </div>
           <div class="col-md-3">
             <label for="saveStartDate" class="control-label">起始日期</label>
-            <input id="saveStartDate" data-provide="datepicker" data-date-format="yyyy-mm-dd" type="text" name="startDate" class="form-control" v-model="formData.startDate">
+            <input id="saveStartDate" data-date-format="yyyy-mm-dd" type="text" name="startDate" class="form-control" v-model="formData.startDate">
           </div>
           <div class="col-md-3">
             <label for="saveEndDate" class="control-label">结束日期</label>
-            <input id="saveEndDate" data-provide="datepicker" data-date-format="yyyy-mm-dd" type="text" name="endDate" class="form-control" v-model="formData.endDate">
+            <input id="saveEndDate" data-date-format="yyyy-mm-dd" type="text" name="endDate" class="form-control" v-model="formData.endDate">
           </div>
         </div>
         <br>
@@ -136,9 +134,10 @@
                 <span>选择证件照片正面</span>
                 <input v-show="false" id="saveCredentialsFront" type="file" name="file" multiple>
                 </span>
+                <button class="btn btn-danger" type="button" v-show="showCredentialsFront" @click="deleteCredentialsFront">删除</button>
             </label>
-            <a :href="credentialsImgFront" data-lightbox="logoImg" data-title="选择证件照片正面" v-show="showCredentialsFront">
-              <img :src="credentialsImgFront" width="842" height="595">
+            <a :href="formData.credentialsFront" data-lightbox="logoImg" data-title="选择证件照片正面" v-show="showCredentialsFront">
+              <img :src="formData.credentialsFront" width="842" height="595">
             </a> 
           </div>
         </div>
@@ -150,11 +149,19 @@
                   <span>选择证件照片背面</span>
                   <input v-show="false" id="saveCredentialsBack" type="file" name="file" multiple>
                   </span>
+                <button class="btn btn-danger" type="button" v-show="showCredentialsBack" @click="deleteCredentialsBack">删除</button>
               </label>
-              <a :href="credentialsImgBack" data-lightbox="credentialsImgBack" data-title="选择证件照片背面" v-show="showCredentialsBack">
-                <img :src="credentialsImgBack" width="842" height="595">
+              <a :href="formData.credentialsBack" data-lightbox="credentialsImgBack" data-title="选择证件照片背面" v-show="showCredentialsBack">
+                <img :src="formData.credentialsBack" width="842" height="595">
               </a> 
             </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="saveRemark" class="control-label">备注</label>
+            <textarea id="saveRemark" class="form-control" v-model="formData.remark" rows="4"></textarea>
+          </div>
         </div>
       </form-dialog>
     </section>

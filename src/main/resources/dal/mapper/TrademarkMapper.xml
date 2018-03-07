@@ -66,7 +66,7 @@
                 `code`,
             </if>
             <if test="applyDate != null">
-                `apply_code`,
+                `apply_date`,
             </if>
             <if test="company != null">
                 `company`,
@@ -89,8 +89,11 @@
             <if test="endDate != null">
                 `end_date`,
             </if>
-            <if test="credentials != null">
-                `credentials`,
+            <if test="credentialsFront != null">
+                `credentials_front`,
+            </if>
+            <if test="credentialsBack != null">
+                `credentials_back`,
             </if>
             <if test="remark != null">
                 `remark`,
@@ -136,14 +139,17 @@
             <if test="rejectStatus != null">
                 #{rejectStatus, jdbcType=TINYINT},
             </if>
-            <if test="startTime != null">
-                #{startTime, jdbcType=DATE},
+            <if test="startDate != null">
+                #{startDate, jdbcType=DATE},
             </if>
-            <if test="endTime != null">
-                #{endTime, jdbcType=DATE},
+            <if test="endDate != null">
+                #{endDate, jdbcType=DATE},
             </if>
-            <if test="credentials != null">
-                #{credentials, jdbcType=VARCHAR},
+            <if test="credentialsFront != null">
+                #{credentialsFront, jdbcType=VARCHAR},
+            </if>
+            <if test="credentialsBack != null">
+                #{credentialsBack, jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
                 #{remark, jdbcType=VARCHAR},
@@ -199,8 +205,11 @@
             <if test="endDate != null">
                 `end_date` = #{endDate, jdbcType=DATE},
             </if>
-            <if test="credentials != null">
-                `credentials` = #{credentials, jdbcType=VARCHAR},
+            <if test="credentialsFront != null">
+                `credentials_front` = #{credentialsFront, jdbcType=VARCHAR},
+            </if>
+            <if test="credentialsBack != null">
+                `credentials_back` = #{credentialsBack, jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
                 `remark` = #{remark, jdbcType=VARCHAR},

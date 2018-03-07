@@ -46,13 +46,16 @@ export default {
             Object.assign(_this.formData, _this.defaultFormData);
         });
     },
+    created: function() {
+        this.defaultFormData = Object.assign({}, this.formData);
+    },
     props: {
         formDialogId: {
             type: String,
             default: "formDialog"
         },
         customDialogClass: {
-            type:String,
+            type: String,
             default: "modal-default"
         },
         formId: {
@@ -66,12 +69,6 @@ export default {
             type: Function
         },
         formData: {
-            type: Object,
-            default: function() {
-                return {}
-            }
-        },
-        defaultFormData: {
             type: Object,
             default: function() {
                 return {}

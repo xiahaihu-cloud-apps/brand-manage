@@ -14,6 +14,9 @@ const Constant = {
         PART_REJECTED_NOT_RECHECK: 4,
         ALL_REJECTED_RECHECK: 5,
         ALL_REJECTED_NOT_RECHECK: 6
+    },
+    ResponseCode: {
+        SUCCESS: 0
     }
 }
 

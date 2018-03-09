@@ -17,7 +17,8 @@ const Constant = {
     },
     ResponseCode: {
         SUCCESS: 0
-    }
+    },
+    DEFAULT_PAGE_SIZE: 10
 }
 
 export default Constant

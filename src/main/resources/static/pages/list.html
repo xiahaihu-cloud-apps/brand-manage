@@ -94,23 +94,13 @@
           <div class="col-md-2">
             <label for="saveStatus" class="control-label">状态</label>
             <select id="saveStatus" class="form-control" name="status" v-model="formData.status">
-              <option value="0">未申请</option>
-              <option value="1">已提交</option>
-              <option value="2">审核期</option>
-              <option value="3">审核通过</option>
-              <option value="4">驳回</option>
+              <option v-for="status in statusList" :value="status.value">{{ status.text }}</option>
             </select>
           </div>
           <div class="col-md-2">
             <label for="saveRejectStatus" class="control-label">申请被拒</label>
             <select name="rejectStatus" id="saveReject" class="form-control" v-model="formData.rejectStatus">
-              <option value="0">未驳回</option>
-              <option value="1">部分驳回</option>
-              <option value="2">全部驳回</option>
-              <option value="3">部分驳回复审</option>
-              <option value="4">部分驳回不复审</option>
-              <option value="5">全部驳回不复审</option>
-              <option value="6">全部驳回复审</option>
+              <option v-for="rejectStatus in rejectStatusList" :value="rejectStatus.value">{{ rejectStatus.text }}</option>
             </select>
           </div>
           <div class="col-md-2">

@@ -12,6 +12,7 @@ import 'blueimp-file-upload'
 
 import Constant from '../constant'
 import Messager from '../NotifyMessager'
+import Helper from '../helper'
 
 const app = new Vue({
     el: "#app",
@@ -34,6 +35,8 @@ const app = new Vue({
             credentialsBack: "",
             remark: ""
         },
+        statusList: Helper.getStatusList(),
+        rejectStatusList: Helper.getRejectStatusList(),
         validateRules: {
             name: {
                 required: true

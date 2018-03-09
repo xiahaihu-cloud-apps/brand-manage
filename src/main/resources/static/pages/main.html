@@ -43,8 +43,13 @@
                                 </div>
                             </div>
                             <div class="box-body">
-
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <brand-box v-for="brand in brandList" :brand="brand" @showDialog="showDialog"></brand-box>
+                                    </div>
+                                </div>
                             </div>
+                            <brand-dialog ref="dialog"></brand-dialog>
                             <div class="box-footer">
                                     <button type="submit" class="btn btn-primary pull-right">Submit</button>
                             </div>

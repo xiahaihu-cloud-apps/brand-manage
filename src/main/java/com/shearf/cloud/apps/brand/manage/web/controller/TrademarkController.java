@@ -23,6 +23,7 @@ public class TrademarkController {
 
     @PostMapping
     public Response add(@RequestBody Trademark trademark) {
+        trademark.setId(null);
         trademarkService.save(trademark);
         return Response.success();
     }
@@ -30,7 +31,8 @@ public class TrademarkController {
     @GetMapping("")
     @ResponseBody
     public Pagination<Trademark> list(TrademarkQueryParam param) {
-        Page<Trademark> page = PageHelper.startPage(param.getPageNum(), param.getPageSize());
+
+        Page<Trademark> page = PageHelper.startPage(param.getPageNumber(), param.getPageSize());
         trademarkService.queryByParam(param);
         return Pagination.build(page.getTotal(), page.getResult());
     }
@@ -43,6 +45,8 @@ public class TrademarkController {
 
     @PutMapping("/{id}")
     public Response update(@PathVariable("id") int id, @RequestBody Trademark trademark) {
+        trademark.setId(id);
+        trademarkService.save(trademark);
         return Response.success();
     }
 

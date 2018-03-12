@@ -11,7 +11,8 @@ $.notifyDefaults({
     delay: 2000,
     offset: {
         y: 60
-    }
+    },
+    z_index: 9999
 });
 
 const Messager = {

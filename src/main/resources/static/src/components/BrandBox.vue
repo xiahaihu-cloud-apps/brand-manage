@@ -86,11 +86,11 @@ export default {
     },
     methods: {
         showDetail: function(id) {
+            let _this = this;
             Axios.get(APIS.RESOURCE + "/" + id).then(function(response) {
                 let result = response.data;
-                console.info(result);
                 if (result.code == Contant.ResponseCode.SUCCESS) {
-                    this.$emit("showDetail", result.data);
+                    _this.$emit("detail", result.data);
                 } else {
                     Messager.error("查询商标详情失败"); 
                 }

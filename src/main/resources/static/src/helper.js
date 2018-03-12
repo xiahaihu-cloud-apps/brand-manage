@@ -1,4 +1,5 @@
 import Constant from './constant'
+import moment from 'moment'
 
 export default {
     getStatusList: function() {
@@ -89,6 +90,13 @@ export default {
             case Constant.RejectStatus.ALL_REJECTED_RECHECK:
                 text = "全部驳回复审";
                 break;
+        }
+        return text;
+    },
+    timeToDate: function(time) {
+        let text = "";
+        if (!_.isNil(time)) {
+            text = moment(time).format("YYYY-MM-DD");
         }
         return text;
     }

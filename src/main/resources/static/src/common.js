@@ -5,6 +5,7 @@ import "jquery-slimscroll"
 import "admin-lte"
 
 import Vue from "vue"
+import 'lodash'
 
 import MainSidebar from './components/MainSidebar.vue'
 import MainHeader from './components/MainHeader.vue'

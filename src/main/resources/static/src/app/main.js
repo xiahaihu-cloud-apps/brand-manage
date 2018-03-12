@@ -33,7 +33,9 @@ const app = new Vue({
 
             })
         },
-        showDialog: function(brand) {
+        showDetail: function(brand) {
+            this.$refs.dialog.brand = Object.assign({}, brand);
+            console.info(this.$refs.dialog.brand);
             this.$refs.dialog.show();
         }
     },

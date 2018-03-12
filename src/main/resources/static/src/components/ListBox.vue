@@ -44,7 +44,9 @@ import 'bootstrap-table/dist/locale/bootstrap-table-zh-CN.min'
 export default {
     name: "ListBox",
     data: function() {
-        return {}
+        return {
+            table: null
+        }
     },
     props: {
         toolbarId: {
@@ -53,6 +55,7 @@ export default {
         },
         dataUrl: {
             type: String,
+            required: true
         },
         tableId: {
             type: String,
@@ -61,6 +64,10 @@ export default {
         query: {
             type: Object,
             default: null
+        },
+        columns: {
+            type: Array,
+            required: true
         }
     },
     computed: {
@@ -70,17 +77,34 @@ export default {
     },
     mounted: function() {
         let $table = $("#" + this.tableId);
+        let _this = this;
+        this.table = $table;
+
         $table.bootstrapTable({
-            query: this.query
+            query: this.query,
+            columns: this.columns
         });
+        $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
+            let rows = _this.getSelections();
+            _this.$emit("selected", rows);
+        })
     },
     methods: {
         refresh: function() {
             let $table = $("#" + this.tableId);
             $table.bootstrapTable("refresh", {
-                query: this.query,
+                query: {},
                 pageNumber: 1
             });
+        },
+        getSelections: function() { 
+            return this.table.bootstrapTable("getSelections");
+        },
+        filterData: function(query) {
+            this.table.bootstrapTable("refresh", {
+                query: query,
+                pageNumber: 1
+            })
         }
     }
 }

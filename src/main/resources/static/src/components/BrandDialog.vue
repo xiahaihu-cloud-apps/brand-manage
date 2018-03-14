@@ -45,6 +45,7 @@
                   </a>
               </dd>
           </dl>
+          <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>

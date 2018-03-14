@@ -14,21 +14,32 @@ Vue.component('brand-dialog', BrandDialog)
 const app = new Vue({
     el: "#app",
     data: {
-        brandList: []
+        brandList: [],
+        searchForm: {
+            keyword: ""
+        },
+        total: 0,
+        currentPage: 1,
+        pageSize: Constant.DEFAULT_PAGE_SIZE
     },
     methods: {
         getByPage(pageNum) {
             let _this = this;
-            pageNum = pageNum == undefined || pageNum == null || pageNum == 0 ?
-                1 : pageNum;
             var listUrl = APIS.LIST;
+            let offset = 0;
+            if (pageNum > 0) {
+                offset = this.pageSize * pageNum
+            }
+            let params = _.assign({}, this.searchForm, {
+                limit: this.pageSize,
+                offset: offset
+            });
             axios.get(APIS.LIST, {
-                params: {
-                    pageNum: pageNum,
-                    pageSize: Constant.DEFAULT_PAGE_SIZE
-                }
+                params: params
             }).then(function(response) {
                 _this.brandList = response.data.rows;
+                _this.total = response.data.total;
+                _this.currentPage = pageNum;
             }).catch(function(error) {
 
             })
@@ -37,9 +48,21 @@ const app = new Vue({
             this.$refs.dialog.brand = Object.assign({}, brand);
             console.info(this.$refs.dialog.brand);
             this.$refs.dialog.show();
+        },
+        search: function() {
+            this.getByPage(1);
+        },
+        nextPage: function() {
+            this.getByPage(this.nextPageNum);
+        }
+    },
+    computed: {
+        nextPageNum: function() {
+            return this.currentPage * this.pageSize >= this.total ? 
+                1 : this.currentPage + 1;
         }
     },
     created: function() {
-        this.getByPage(1);
+        this.getByPage(this.nextPageNum);
     }
 });

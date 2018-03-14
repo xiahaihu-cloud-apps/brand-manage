@@ -30,7 +30,7 @@
 
     <sql id="BaseQueryParam">
         <if test="keyword != null">
-            AND (`name` LIKE %${keyword, jdbcType=VARCHAR}% OR `company` LIKE %${keyword, jdbcType=VARCHAR}%)
+            AND (`name` LIKE CONCAT('%','${keyword}','%')  OR `company` LIKE CONCAT('%','${keyword}','%'))
         </if>
         <if test="status != null">
             AND `status` = #{status, jdbcType=TINYINT}
@@ -231,4 +231,8 @@
             `id` = #{id, jdbcType=INTEGER}
         </where>
     </update>
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM `brand_manage_trademark`
+        WHERE `id` = #{id, jdbcType=INTEGER}
+    </delete>
 </mapper>

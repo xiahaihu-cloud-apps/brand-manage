@@ -46,11 +46,11 @@
                       <div class="col-xs-3">
                       </div>
                 </div>
+                </form>
                 <div class="box-footer">
                   <button type="button" class="btn btn-primary pull-right" @click="search">搜索</button>
                   <button type="button" class="btn btn-default pull-right" style="margin-right:10px;" @click="reset">重置</button>
                 </div>
-              </form>
           </div>
                 
           <list-box ref="list" :data-url="url" :columns="tableColumns" @selected="selected">

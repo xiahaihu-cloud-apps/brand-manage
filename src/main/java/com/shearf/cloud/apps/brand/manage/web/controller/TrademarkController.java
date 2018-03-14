@@ -7,6 +7,7 @@ import com.shearf.cloud.apps.brand.manage.domain.param.TrademarkQueryParam;
 import com.shearf.cloud.apps.brand.manage.service.TrademarkService;
 import com.shearf.cloud.apps.commons.foundation.response.Pagination;
 import com.shearf.cloud.apps.commons.foundation.response.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -47,6 +48,17 @@ public class TrademarkController {
     public Response update(@PathVariable("id") int id, @RequestBody Trademark trademark) {
         trademark.setId(id);
         trademarkService.save(trademark);
+        return Response.success();
+    }
+
+    @DeleteMapping("")
+    @ResponseBody
+    public Response delete(String ids) {
+        if (StringUtils.isNoneBlank(ids)) {
+            for (String id : StringUtils.split(ids, ",")) {
+                trademarkService.delete(Integer.valueOf(id));
+            }
+        }
         return Response.success();
     }
 

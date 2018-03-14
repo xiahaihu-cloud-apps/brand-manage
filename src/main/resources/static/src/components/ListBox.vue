@@ -87,6 +87,9 @@ export default {
         $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
             let rows = _this.getSelections();
             _this.$emit("selected", rows);
+        });
+        $table.on('load-success.bs.table', function() {
+            _this.$emit("selected", []);
         })
     },
     methods: {

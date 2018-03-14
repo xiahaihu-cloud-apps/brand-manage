@@ -126,7 +126,34 @@ const app = new Vue({
             }
         },
         deleteItem: function() {
-
+            if (this.canDelete) {
+                let _this = this;
+                let rows = this.$refs.list.getSelections();
+                if (rows.length > 0) {
+                    Messager.confirm("是否删除？", function() {
+                        let ids = [];
+                        _.forEach(rows, function(row) {
+                            ids[ids.length] = row.id;
+                        });
+                        axios.delete(APIS.RESOURCE, {
+                            params: {
+                                ids: _.join(ids)
+                            }
+                        }).then(function(response) {
+                            let result = response.data;
+                            if (result.code == Constant.ResponseCode.SUCCESS) {
+                                _this.$refs.list.refresh();
+                            } else {
+                                Messager.error("删除失败");
+                            }
+                        }).catch(function(err) {
+                            Messager.error("删除失败");
+                        });
+                    })
+                } else {
+                    Messager.error("请选择一项");
+                }
+            }
         },
         selected: function(rows) {
             this.canEdit = rows.length == 1;
@@ -171,11 +198,12 @@ const app = new Vue({
                     if (result.code == Constant.ResponseCode.SUCCESS) {
                         Messager.success("添加商标成功");
                         _this.closeDialog();
-                        _this.$refs.refresh();
+                        _this.$refs.list.refresh();
                     } else {
                         Messager.error("添加商标失败");
                     }
                 }).catch(function(error){
+                    console.info(error);
                     Messager.error("操作失败");
                 })
             }

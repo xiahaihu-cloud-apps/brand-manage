@@ -25,21 +25,23 @@
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <div class="row">
+                                    <div class="col-xs-4"></div>
                                     <div class="col-xs-4">
                                         <form class="search-form">
                                             <div class="input-group">
-                                                <input type="text" name="search" class="form-control" placeholder="Search">
+                                                <input type="text" name="search" class="form-control" placeholder="Search" v-model="searchForm.keyword">
                                                 <div class="input-group-btn">
-                                                    <button type="submit" name="submit" class="btn btn-success">
+                                                    <button type="button" name="submit" class="btn btn-success" @click="search">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="col-xs-8">
-                                        <h3 class="box-title">Hover Data Table</h3>
-                                    </div>
+                                    <div class="col-xs-4"></div>
+                                    <!-- <div class="col-xs-8"> -->
+                                        <!-- <h3 class="box-title">Hover Data Table</h3> -->
+                                    <!-- </div> -->
                                 </div>
                             </div>
                             <div class="box-body">
@@ -51,7 +53,7 @@
                             </div>
                             <brand-dialog ref="dialog"></brand-dialog>
                             <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                <button type="button" class="btn btn-primary pull-right" @click="nextPage">换页</button>
                             </div>
                         </div>
 
